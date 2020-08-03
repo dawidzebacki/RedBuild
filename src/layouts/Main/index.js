@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Conditional from 'components/Conditional';
 
 const Layout = ({ children }) => {
 	const developingYear = 2020;
@@ -17,7 +18,7 @@ const Layout = ({ children }) => {
 				{children}
 			</main>
 			<footer>
-				Dawid Zębacki, {yearMessage}	
+				<Conditional to="https://www.linkedin.com/in/dawidzebacki/">Dawid Zębacki</Conditional>, {yearMessage}	
 			</footer>
 		</>
 	);
