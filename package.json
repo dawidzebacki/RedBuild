@@ -1,0 +1,80 @@
+{
+	"name": "redbuild",
+	"private": true,
+	"description": "RedBuild company business website",
+	"version": "1.0.0",
+	"author": "redgato",
+	"dependencies": {
+		"babel-plugin-styled-components": "^1.10.7",
+		"gatsby": "^2.19.17",
+		"gatsby-image": "^2.2.41",
+		"gatsby-plugin-manifest": "^2.2.41",
+		"gatsby-plugin-offline": "^3.0.34",
+		"gatsby-plugin-react-helmet": "^3.1.22",
+		"gatsby-plugin-sharp": "^2.4.5",
+		"gatsby-plugin-styled-components": "^3.1.19",
+		"gatsby-source-filesystem": "^2.1.48",
+		"gatsby-transformer-sharp": "^2.3.14",
+		"prop-types": "^15.7.2",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"react-helmet": "^5.2.1",
+		"styled-components": "^5.0.1"
+	},
+	"devDependencies": {
+		"eslint": "^6.8.0",
+		"eslint-config-airbnb": "^18.0.1",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-react": "^7.18.3",
+		"eslint-plugin-react-hooks": "^2.3.0",
+		"gatsby-plugin-root-import": "^2.0.5",
+		"husky": "^4.2.3",
+		"lint-staged": "^10.0.7",
+		"prettier": "^1.19.1",
+		"stylelint": "^13.2.0",
+		"stylelint-config-rational-order": "^0.1.2",
+		"stylelint-config-standard": "^20.0.0",
+		"stylelint-order": "^4.0.0"
+	},
+	"keywords": [
+		"gatsby"
+	],
+	"license": "MIT",
+	"scripts": {
+		"build": "gatsby build",
+		"develop": "gatsby develop",
+		"start": "npm run develop",
+		"serve": "gatsby serve",
+		"clean": "gatsby clean",
+		"format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+		"eslint": "eslint \"**/*.{js,jsx}\" --fix",
+		"stylelint": "stylelint \"**/*.{js,css,scss}\" --fix",
+		"prelint": "npm run format",
+		"lint": "npm run stylelint",
+		"postlint": "npm run eslint"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dawidzebacki/RedBuild"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.js": [
+			"prettier --config .prettierrc --write",
+			"stylelint --fix",
+			"eslint --fix"
+		],
+		"*.{json,md}": [
+			"prettier --config .prettierrc --write"
+		],
+		"*.{css,scss}": [
+			"prettier --config .prettierrc --write",
+			"stylelint --fix"
+		]
+	}
+}
