@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Conditional from 'components/Conditional';
+import { ThemeProvider } from 'styled-components';
+import theme from 'assets/styles/theme';
+import Navbar from 'views/Navbar';
+import Footer from 'views/Footer';
+import { SmoothScrollContext } from 'components/Scroll';
+import { heightOnMobile } from 'utils';
 
 const Layout = ({ children }) => {
-	const developingYear = 2020;
-	let yearMessage = "";
+	const [navbarHeight, setNavbarHeight] = useState(0);
 
-	if (developingYear !== new Date().getFullYear()) {
-		yearMessage = `${developingYear} - ${new Date().getFullYear()}`;
-	} else {
-		yearMessage = `${new Date().getFullYear()}`;
-	}
+	useEffect(() => {
+		const navbar = document.querySelector('#navbar');
+		setNavbarHeight(heightOnMobile(672, navbar));
+		const handleResize = () => setNavbarHeight(heightOnMobile(672, navbar));
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	return (
-		<>
-			<main>
-				{children}
-			</main>
-			<footer>
-				<Conditional to="https://www.linkedin.com/in/dawidzebacki/">Dawid Zębacki</Conditional>, {yearMessage}	
-			</footer>
-		</>
+		<ThemeProvider theme={theme}>
+			<SmoothScrollContext.Provider value={navbarHeight}>
+				<Navbar />
+				<main>{children}</main>
+				<Footer />
+			</SmoothScrollContext.Provider>
+		</ThemeProvider>
 	);
-}
-
+};
 
 Layout.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
 export default Layout;
+
